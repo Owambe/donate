@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Donate</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<style>
+body {font-family: "Times New Roman", Georgia, Serif;}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display";
+  letter-spacing: 5px;
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+     <!-- Right-sided navbar links. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
+   <div class="w3-display-bottomleft w3-padding-large w3-opacity">
+    <h1 class="w3-xxlarge">Contact</h1>
+  </div>
+</header>
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:1100px">
+  
+  <hr>
+
+  <!-- Contact Section -->
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<div class="w3-container w3-padding-64" id="contact">
+    <h1>Want to help? Let's show you how.</h1><hr><br><br>
+    <h5> NOTICE: This website was built for GADS2020 community project, do not send any money through PayPal. <br>The stories are fictional and do not represent real people. Thanks.</h5>
+    <p class="w3-text-blue-grey w3-large"></p><hr><br> <br>
+    <p></p>
+<p><input class="w3-input w3-padding-16" type="text" placeholder="Name" id="name" required name="Name"></p>
+<p><input class="w3-input w3-padding-16" type="email" placeholder="Email" id="mail" required name="Email"></p>  <br><br>  
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="YX9EKW77W2SQY">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+    </form>
+  </div>
+  
+<!-- End page content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-center w3-light-grey w3-padding-32">
+  <p>GADS 2020 <a href="https://gads.andela.com/" title="W3.CSS" target="_blank" class="w3-hover-text-green">Community Project</a></p>
+</footer>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"</script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+<script>
+'use strict';
+
+//grab a form
+const form = document.querySelector('.form-inline');
+
+//grab an input
+const inputEmail = form.querySelector('#inputEmail');
+
+
+//config your firebase push
+const config = {
+    apiKey: "AIzaSyDn5cvH-LZmp3hvDDXCBFIzzvpEmCl-2Rc",
+    authDomain: "wambe2.firebaseapp.com",
+    databaseURL: "https://wambe2.firebaseio.com",
+    projectId: "wambe2",
+    storageBucket: "wambe2.appspot.com",
+    messagingSenderId: "970130485708",
+};
+
+
+//create a functions to push
+    function firebasePush(input) {
+
+
+        //prevents from braking
+        if (!firebase.apps.length) {
+            firebase.initializeApp(config);
+        }
+
+        //push itself
+        var mailsRef = firebase.database().ref('emails').push().set(
+            {
+                mail: input.value
+            }
+        );
+
+    }
+
+//push on form submit
+    if (form) {
+        form.addEventListener('submit', function (evt) {
+            evt.preventDefault();
+            firebasePush(inputEmail);
+
+            //shows alert if everything went well.
+            return alert('Message submitted, thanks.');
+        })
+    }
+</script>
+
+<script>
+function myFunction() {
+  location.replace("https://owambe.github.io/messagereceived/")
+}
+</script>
+
+<script type="text/javascript">
+    document.getElementById("myButton").onclick = function () {
+        location.href = "https://owambe.github.io/messagereceived/";
+    };
+</script>
+</body>
+</html>
